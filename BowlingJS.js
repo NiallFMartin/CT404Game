@@ -212,7 +212,7 @@ function reset()
     upPressed = false;
     downPressed = false;
 
-    if (frameCount < 5)
+    if (frameCount < 6)
     {
         spacePressed = false;
         ballx = 40;
