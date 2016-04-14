@@ -244,6 +244,8 @@ function reset()
     else
     {
         alert("Game Over. You scored " +  score + ".");
+        ballx = 40;
+        bally = 175;
         document.location.reload();
     }
 }
