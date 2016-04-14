@@ -212,53 +212,51 @@ function reset()
     upPressed = false;
     downPressed = false;
 
-    if (frameCount < 6)
+    ballx = 40;
+    bally = 175;
+    throwNum++;
+
+    if (pinCount == 0)
     {
-        spacePressed = false;
-        ballx = 40;
-        bally = 175;
-        throwNum++;
-
-        if (pinCount == 0)
-        {
-            cheer.play();
-            alert("Strike! 10 bonus points!")
-            score += 10;
-        }
-
-        if (pinCount == 0 || throwNum%2 !== 0)
-        {
-            //reset pin locations
-            for (var i = 0; i < 10; i++)
-            {
-                currentPinLocx[i] = pinsx[i];
-                currentPinLocy[i] = pinsy[i];
-                pinCount = 10;
-            }
-            frameCount ++;
-        }
-        
-        drawPins();
+        cheer.play();
+        alert("Strike! 10 bonus points!")
+        score += 10;
     }
 
-    else
+    if (pinCount == 0 || throwNum%2 !== 0)
     {
-        alert("Game Over. You scored " +  score + ".");
-        ballx = 40;
-        bally = 175;
-        document.location.reload();
+        //reset pin locations
+        for (var i = 0; i < 10; i++)
+        {
+            currentPinLocx[i] = pinsx[i];
+            currentPinLocy[i] = pinsy[i];
+            pinCount = 10;
+        }
+        frameCount ++;
     }
+    
+    drawPins();
 }
 
 //Main method
 function draw() {
-    ctx.clearRect(0, 0, game.width, game.height);
-    drawBackground();
-    drawText();
-    drawBall();
-    drawPins();
-    collisions();
-    requestAnimationFrame(draw);
+    if(frameCount > 5)
+    {
+        alert("Game Over. You scored " +  score + ".");
+		ballx = 40;
+        bally = 175;
+        document.location.reload();
+    }
+    else
+    {
+        ctx.clearRect(0, 0, game.width, game.height);
+        drawBackground();
+        drawText();
+        drawBall();
+        drawPins();
+        collisions();
+        requestAnimationFrame(draw);
+    }
 }
 
 draw();
